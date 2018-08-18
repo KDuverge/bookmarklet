@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100%;
+    }
+
+    .input--bookmark {
+      height: 50vh;
+      width: 250px;
+      border: 1px solid #000;
+      box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 999999999 !important;
+    }
+
+    .input--container {
+      width: 100%;
+      height: 100px;
+      border-bottom: 2px solid black;
+      padding: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .input--submit {
+      padding: 5px 15px;
+      cursor: pointer;
+      transition: transform 300ms ease,
+      box-shadow 300ms ease;
+      border-radius: 10px;
+      background: green;
+      color: white;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      outline: none;
+    }
+
+    .input--submit:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Home</h1>
+
+  <div class="home">My Application</div>
+
+
+
+  <!-- BookMarklet  -->
+  <div class="input--bookmark">
+    <div class="input--container">
+      <select class="input--select" name="" id="">
+        <option value="home">Home</option>
+        <option value="category">Category</option>
+        <option value="product">Product</option>
+      </select>
+      <button class="input--submit">Run</button>
+    </div>
+  </div>
+  <!-- BookMarklet End -->
+
+
+  <script src="index.js"></script>
+</body>
+
+</html>
