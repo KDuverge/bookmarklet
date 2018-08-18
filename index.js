@@ -2,7 +2,7 @@
   let input = document.querySelector(".input--select"),
     button = document.querySelector(".input--submit");
 
-  let word = "";
+  let word;
   let queue = [document.body][0].childNodes;
 
   let elements = {
@@ -25,6 +25,7 @@
   /* Scrape Body for specific keywords */
 
   let scrape = () => {
+    word === undefined ? (word = "home") : word;
     queue.forEach((el, i) => {
       if (
         el.textContent.toLowerCase().includes(word) ||
@@ -33,8 +34,7 @@
       ) {
         el = new scrapedValues(el.nodeName, el.id, el.className);
         if (el.className !== "input--bookmark") {
-          // elements[word].push(el);
-          console.log(el);
+          elements[word].push(el);
         }
       }
     });
@@ -48,7 +48,6 @@
   /* Listen for Keyword dropdown change*/
   input.addEventListener("change", function(e) {
     word = e.target.value;
-    console.log(word);
   });
 
   /* Listen for Button Click to Scrape DOM */
