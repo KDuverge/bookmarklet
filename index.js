@@ -55,7 +55,7 @@
   };
 
   /* ============================================================ */
-  /* Listen for Keyword dropdown change*/
+  /* Listen for Keyword dropdown change */
   input.addEventListener("change", function(e) {
     word = e.target.value;
   });
