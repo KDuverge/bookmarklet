@@ -1,42 +1,56 @@
 (function() {
   let input = document.querySelector(".input--select"),
     button = document.querySelector(".input--submit");
-  let keyWord;
 
-  let word = "home";
+  let word = "";
   let queue = [document.body][0].childNodes;
-  let curr;
 
-  let elements = ["home", "product", "category", "search"];
+  let elements = {
+    home: [],
+    search: [],
+    product: [],
+    category: []
+  };
 
-  elements.forEach((el, i) => {
-    localStorage.setItem(el, i);
-  });
+  /* KeyWord Constructor to be saved in Local Storage */
 
   class scrapedValues {
-    constructor(el, word, id, className) {
-      this.el = el;
-      this.word = word;
+    constructor(nodeName, id, className) {
+      this.nodeName = nodeName;
       this.id = id;
       this.className = className;
     }
   }
 
-  let foundWord = [];
-  console.log(queue);
-  queue.forEach((el, i) => {
-    if (el.textContent.toLowerCase().includes(word) || el.className === word) {
-      console.log(el);
-      foundWord.push(el.className);
-      foundWord.push(el.textContent);
-    }
-  });
-  let home = localStorage.getItem(word);
+  /* Scrape Body for specific keywords */
 
-  console.log(home);
-  // console.log(foundWord);
+  let scrape = () => {
+    queue.forEach((el, i) => {
+      if (
+        el.textContent.toLowerCase().includes(word) ||
+        el.className === word ||
+        el.id === word
+      ) {
+        el = new scrapedValues(el.nodeName, el.id, el.className);
+        if (el.className !== "input--bookmark") {
+          // elements[word].push(el);
+          console.log(el);
+        }
+      }
+    });
+
+    localStorage.setItem(word, JSON.stringify(elements[word]));
+    let storedItem = JSON.parse(localStorage.getItem(word));
+
+    console.log(storedItem);
+  };
+
+  /* Listen for Keyword dropdown change*/
   input.addEventListener("change", function(e) {
-    keyWord = e.target.value;
+    word = e.target.value;
+    console.log(word);
   });
-  button.addEventListener("click", function() {});
+
+  /* Listen for Button Click to Scrape DOM */
+  button.addEventListener("click", scrape);
 })();
