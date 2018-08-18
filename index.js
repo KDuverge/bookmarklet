@@ -1,19 +1,24 @@
 (function() {
   let input = document.querySelector(".input--select"),
-    button = document.querySelector(".input--submit");
+    body = document.querySelector("body"),
+    button = document.querySelector(".input--submit"),
+    remove = document.querySelector(".input--delete"),
+    queue = [document.body][0].childNodes,
+    word;
 
-  let word;
-  let queue = [document.body][0].childNodes;
-
+  /* ============================================================ */
+  /* Setting Initial Object with keyword Arrays */
   let elements = {
     home: [],
     search: [],
     product: [],
-    category: []
+    category: [],
+    cart: [],
+    checkout: []
   };
 
+  /* ============================================================ */
   /* KeyWord Constructor to be saved in Local Storage */
-
   class scrapedValues {
     constructor(nodeName, id, className) {
       this.nodeName = nodeName;
@@ -22,17 +27,14 @@
     }
   }
 
+  /* ============================================================ */
   /* Scrape Body for specific keywords */
-
   let scrape = () => {
     word === undefined ? (word = "home") : word;
     queue.forEach((el, i) => {
-      if (
-        el.textContent.toLowerCase().includes(word) ||
-        el.className === word ||
-        el.id === word
-      ) {
-        el = new scrapedValues(el.nodeName, el.id, el.className);
+      if (el.className === word || el.id === word) {
+        let { nodeName, id, className } = el;
+        el = new scrapedValues(nodeName, id, className);
         if (el.className !== "input--bookmark") {
           elements[word].push(el);
         }
@@ -45,11 +47,38 @@
     console.log(storedItem);
   };
 
+  /* ============================================================ */
+  /* Clear Local Storage */
+  let clearStorage = () => {
+    localStorage.clear();
+    console.log("Local Storage has been cleared...");
+  };
+
+  /* ============================================================ */
   /* Listen for Keyword dropdown change*/
   input.addEventListener("change", function(e) {
     word = e.target.value;
   });
 
+  /* ============================================================ */
   /* Listen for Button Click to Scrape DOM */
   button.addEventListener("click", scrape);
+
+  /* ============================================================ */
+  /* Listen for Button Click to clear local storage */
+  remove.addEventListener("click", clearStorage);
 })();
+
+// var bookStyles = {
+//   color: "red",
+//   backgroundColor: "blue",
+//   height: "300px",
+//   width: "200px"
+// };
+
+// let div = document.createElement("div");
+
+// for (let style in bookStyles) {
+//   div.style[style] = bookStyles[style];
+// }
+// body.appendChild(div);
