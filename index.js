@@ -34,7 +34,7 @@
 
   let bookMarkletStyle = {
     bxBookmarkk: {
-      height: '500px',
+      height: '300px',
       width: '250px',
       border: '1px solid #000',
       boxShadow: '0 2px 2px 2px rgba(0, 0, 0, 0.5)',
@@ -46,7 +46,6 @@
     bxContainerr: {
       width: '100%',
       height: '100px',
-      borderBottom: '2px solid black',
       padding: '10px',
       display: 'flex',
       flexDirection: 'row',
