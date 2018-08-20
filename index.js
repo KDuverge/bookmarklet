@@ -1,14 +1,14 @@
 (function () {
-  let body = document.querySelector("body");
-  let queue = [...[document.body][0].childNodes];
-  let bookClass = 'input--bookmark';
-  let word;
+  let body = document.querySelector("body"),
+    queue = [...[document.body][0].childNodes],
+    bookClass = 'input--bookmark',
+    word;
 
   /* ============================================================ */
   /* Add DIV to DOM */
 
   let bookMarkletElements = `
-        <div class="bx--bookmark">
+      <div class="bx--bookmark">
         <div class="bx--container">
           <select class="bx--select">
             <option value="home">Home</option>
@@ -127,7 +127,7 @@
       this.id = id;
       this.className = className;
       this.outerHTML = outerHTML;
-      this.amount = 0;
+      /* this.amount = 0; */
     }
   };
 
@@ -145,7 +145,7 @@
 
     localStorage.setItem(word, JSON.stringify(elements[word]));
     let storedItem = JSON.parse(localStorage.getItem(word));
-    console.log(storedItem);
+    console.log(elements);
   };
 
   /* ============================================================ */
