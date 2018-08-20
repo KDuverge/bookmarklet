@@ -41,7 +41,8 @@
       position: 'absolute',
       top: '10px',
       right: '10px',
-      zIndex: '999999999 !important'
+      background: 'white',
+      zIndex: '999999999'
     },
     bxContainerr: {
       width: '100%',
