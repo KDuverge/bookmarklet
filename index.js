@@ -44,7 +44,7 @@ function loadBookMarklet() {
 
   let bookMarkletStyle = {
     bxBookmarkk: {
-      height: '300px',
+      height: '120px',
       width: '250px',
       border: '1px solid #000',
       boxShadow: '0 2px 2px 2px rgba(0, 0, 0, 0.5)',
