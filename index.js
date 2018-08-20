@@ -1,4 +1,14 @@
-(function () {
+if (!($ = window.jQuery)) {
+  script = document.createElement('script');
+  script.src = 'https://code.jquery.com/jquery-3.3.1.slim.js';
+  script.onload = loadBookMarklet;
+  document.body.appendChild(script);
+}
+else {
+  loadBookMarklet();
+}
+
+function loadBookMarklet() {
   let body = document.querySelector("body"),
     queue = [...[document.body][0].childNodes],
     bookClass = 'input--bookmark',
@@ -181,5 +191,5 @@
   /* ============================================================ */
   /* Listen for Button Click to clear local storage */
   bxClear.addEventListener("click", clearStorage);
-})();
+})
 
