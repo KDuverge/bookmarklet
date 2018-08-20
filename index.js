@@ -191,5 +191,5 @@ function loadBookMarklet() {
   /* ============================================================ */
   /* Listen for Button Click to clear local storage */
   bxClear.addEventListener("click", clearStorage);
-})
+};
 
