@@ -1,10 +1,8 @@
 (function () {
-  let body = document.querySelector("body"),
-    queue = [...[document.body][0].childNodes],
-    bookClass = 'input--bookmark',
-    newItem = [],
-    word;
-
+  let body = document.querySelector("body");
+  let queue = [...[document.body][0].childNodes];
+  let bookClass = 'input--bookmark';
+  let word;
 
   /* ============================================================ */
   /* Add DIV to DOM */
@@ -26,7 +24,7 @@
       </div>
   `;
 
-  $(body).append(bookMarkletElements)
+  $(body).append(bookMarkletElements);
 
   let bxBookmark = document.querySelector('.bx--bookmark'),
     bxSubmit = document.querySelector(".bx--submit"),
@@ -83,7 +81,7 @@
       transform: 'translate(0, 0)',
       boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
     }
-  }
+  };
 
   let { bxBookmarkk, bxContainerr, bxSubmitt, bxClearr, bxHoverr, bxNonHover } = bookMarkletStyle;
 
@@ -91,27 +89,24 @@
     for (let style in elementStyle) {
       element.style[style] = elementStyle[style]
     }
-  }
+  };
 
   const buttonHover = (button) => {
     button.addEventListener('mouseenter', function () {
       setStyles(bxHoverr, this);
-    })
+    });
     button.addEventListener('mouseleave', function () {
       setStyles(bxNonHover, this);
-    })
-  }
+    });
+  };
 
   setStyles(bxBookmarkk, bxBookmark);
   setStyles(bxContainerr, bxContainer);
   setStyles(bxSubmitt, bxSubmit);
   setStyles(bxClearr, bxClear);
 
-  buttonHover(bxSubmit)
-  buttonHover(bxClear)
-
-
-
+  buttonHover(bxSubmit);
+  buttonHover(bxClear);
 
   /* ============================================================ */
   /* Setting Initial Object with keyword Arrays */
@@ -134,9 +129,7 @@
       this.outerHTML = outerHTML;
       this.amount = 0;
     }
-  }
-
-  console.log(queue)
+  };
 
   /* ============================================================ */
   /* Scrape Body for specific keywords */
@@ -146,25 +139,20 @@
       let { nodeName, id, className, outerHTML } = el;
       if ((className === word || id === word) && className !== bookClass) {
         let item = new scrapedValues(nodeName, id, className, outerHTML);
-
-
         elements[word].push(item);
       }
     });
 
     localStorage.setItem(word, JSON.stringify(elements[word]));
     let storedItem = JSON.parse(localStorage.getItem(word));
-
     console.log(storedItem);
   };
 
   /* ============================================================ */
   /* Check for multiple elements of the same kind */
   let checkForMultiple = () => {
-
     return;
   }
-
 
   /* ============================================================ */
   /* Clear Local Storage */
@@ -195,16 +183,3 @@
   bxClear.addEventListener("click", clearStorage);
 })();
 
-// var bookStyles = {
-//   color: "red",
-//   backgroundColor: "blue",
-//   height: "300px",
-//   width: "200px"
-// };
-
-// let div = document.createElement("div");
-
-// for (let style in bookStyles) {
-//   div.style[style] = bookStyles[style];
-// }
-// body.appendChild(div);
