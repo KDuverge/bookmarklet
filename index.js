@@ -148,7 +148,7 @@ function loadBookMarklet() {
     word === undefined ? (word = "home") : word;
     queue.map((el, i, arr) => {
       let { nodeName, id, className, outerHTML } = el;
-      if ((className.includes(word) || id.includes(word)) && className !== bookClass) {
+      if ((className === word || id === word) && className !== bookClass) {
         let item = new scrapedValues(nodeName, id, className, outerHTML);
         elements[word].push(item);
       }
