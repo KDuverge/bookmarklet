@@ -1,122 +1,216 @@
 if (!($ = window.jQuery)) {
-  script = document.createElement('script');
-  script.src = 'https://code.jquery.com/jquery-3.3.1.slim.js';
+  script = document.createElement("script");
+  script.src = "https://code.jquery.com/jquery-3.3.1.slim.js";
   script.onload = loadBookMarklet;
   document.body.appendChild(script);
-}
-else {
+} else {
   loadBookMarklet();
 }
 
 function loadBookMarklet() {
   let body = document.querySelector("body"),
     queue = [...[document.body][0].childNodes],
-    bookClass = 'input--bookmark',
+    bookClass = "input--bookmark",
     word;
 
   /* ============================================================ */
   /* Add DIV to DOM */
 
   let bookMarkletElements = `
-      <div class="bx--bookmark">
         <div class="bx--container">
-          <select class="bx--select">
-            <option value="home">Home</option>
-            <option value="category">Category</option>
-            <option value="product">Product</option>
-            <option value="search">Search</option>
-            <option value="cart">Cart</option>
-            <option value="checkout">Checkout</option>
-          </select>
-          <button class="bx--submit">Run</button>
-          <button class="bx--delete">Clear</button>
+          <div class="page-module_content page-module_content__styled">
+          <div class="fields">
+          <div class="fields_row ">
+              <input class="text-input_input" id="bx-input">
+          </div>
+          <div class="fields_row ">
+            <div class="fields_col fields_col__fill">
+              <button class="btn btn__small "id="run_btn">
+                Run
+              </button>
+            </div>
+            <div class="fields_col fields_col__fill">
+              <button class="btn btn__small btn__secondary" id="clear_btn">Clear</button>
+            </div>
+          </div>
         </div>
-      </div>
+          </div>
+        </div>
   `;
 
   $(body).append(bookMarkletElements);
 
-  let bxBookmark = document.querySelector('.bx--bookmark'),
-    bxSubmit = document.querySelector(".bx--submit"),
-    bxClear = document.querySelector(".bx--delete"),
-    input = document.querySelector(".bx--select"),
-    bxContainer = document.querySelector('.bx--container');
+  let PageModule = document.querySelector(".page-module_content"),
+    PageModuleStyled = document.querySelector(".page-module_content__styled"),
+    TextInput = document.querySelector(".text-input_input"),
+    Fields = document.querySelector(".fields"),
+    FieldsRow = document.querySelector(".fields_row"),
+    FieldsCol = document.querySelector(".fields_col"),
+    FieldsColFill = document.querySelector(".fields_col__fill"),
+    Btn = document.querySelector(".btn"),
+    BtnSmall = document.querySelector(".btn__small"),
+    BtnSecondary = document.querySelector(".btn__secondary"),
+    BxContainer = document.querySelector(".bx--container"),
+    bxInput = document.querySelector("#bx-input"),
+    runBtn = document.querySelector("#run_btn"),
+    clearBtn = document.querySelector("#clear_btn");
 
   let bookMarkletStyle = {
-    bxBookmarkk: {
-      height: '120px',
-      width: '250px',
-      border: '1px solid #000',
-      boxShadow: '0 2px 2px 2px rgba(0, 0, 0, 0.5)',
-      position: 'absolute',
-      top: '10px',
-      right: '10px',
-      background: 'white',
-      zIndex: '999999999'
+    bxContainer: {
+      position: "absolute",
+      top: "10px",
+      right: "10px"
     },
-    bxContainerr: {
-      width: '100%',
-      height: '100px',
-      padding: '10px',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-evenly',
-      alignItems: 'center'
+    textInput: {
+      padding: "1.2rem 0 0",
+      borderWidth: 0,
+      "border-bottom-width": "1px",
+      "background-color": "transparent",
+      "font-size": "1rem",
+      border: "1px solid #D9E9F3",
+      "margin-bottom": "10px"
     },
-    bxSubmitt: {
-      padding: '5px 15px',
-      cursor: 'pointer',
-      transition: 'transform 300ms ease, box-shadow 300ms ease',
-      borderRadius: '10px',
-      background: 'green',
-      color: 'white',
-      boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-      outline: 'none'
+    pageModuleContent: {
+      display: "-ms-grid",
+      display: "grid",
+      "grid-gap": "5px",
+      "-ms-grid-rows": "max-content 1fr",
+      "grid-template-rows": "-webkit-max-content 1fr",
+      "grid-template-rows": "max-content 1fr"
     },
-    bxClearr: {
-      padding: '5px 15px',
-      cursor: 'pointer',
-      transition: 'transform 300ms ease, box-shadow 300ms ease',
-      borderRadius: '10px',
-      background: 'red',
-      color: 'white',
-      boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-      outline: 'none'
+    pageModuleContentStyled: {
+      padding: "2rem",
+      border: "1px solid #D9E9F3",
+      backgroundColor: "#FFFFFF"
+    },
+    fields: {
+      display: "grid",
+      display: "-ms-grid",
+      "grid-row-gap": "2rem"
+    },
+    fieldsRow: {
+      display: "-webkit-box",
+      display: "-ms-flexbox",
+      display: "flex",
+      "-webkit-box-align": "start",
+      "-ms-flex-align": "start",
+      "align-items": "start",
+      width: "100%"
+    },
+    fieldsCol: {
+      display: "-ms-grid",
+      display: "grid",
+      gridAutoFlow: "column",
+      gridColumnGap: "1.2rem"
+    },
+    fieldsColFill: {
+      "webkit-box-flex": 1,
+      "-ms-flex": 1,
+      flex: 1
+    },
+    btn: {
+      cursor: "pointer",
+      "-webkit-user-select": "none",
+      "-moz-user-select": "none",
+      "-ms-user-select": "none",
+      "user-select": "none",
+      display: "-webkit-inline-box",
+      display: "-ms-inline-flexbox",
+      display: "inline-flex",
+      "-webkit-box-align": "center",
+      "-ms-flex-align": "center",
+      "align-items": "center",
+      "-webkit-box-pack": "center",
+      "-ms-flex-pack": "center",
+      "justify-content": "center",
+      "min-width": "11.333rem",
+      height: "2.667rem",
+      padding: "0 1.2rem",
+      border: "1px solid #3686FB",
+      "border-radius": 0,
+      "background-color": "#3686FB",
+      fill: "#FFFFFF",
+      color: "#FFFFFF",
+      "font-family":
+        "Gotham SSm A, Gotham SSm B, Helvetica Neue, Helvetica, Arial",
+      "font-size": "1rem",
+      "font-weight": 500,
+      "text-align": "center",
+      "text-decoration": "none",
+      "white-space": "nowrap",
+      transition: "transform 300ms ease-in-out",
+      "margin-bottom": "10px"
+    },
+    btnSmall: {
+      "min-width": "6.667rem",
+      height: "2.4rem",
+      padding: "0 0.8rem",
+      "font-size": "0.8rem"
+    },
+    btnSecondary: {
+      "min-width": "7.467rem",
+      "border-color": "#3686FB",
+      "background-color": "transparent",
+      fill: "#3686FB",
+      color: "#3686FB",
+      cursor: "pointer",
+      width: "100%"
     },
     bxHoverr: {
-      transform: 'translate(2px, 2px)',
-      boxShadow: '0 0 0 rgba(0, 0, 0, 0.5)'
+      transform: "translate(2px, 2px)",
+      boxShadow: "0 0 0 rgba(0, 0, 0, 0.5)"
     },
     bxNonHover: {
-      transform: 'translate(0, 0)',
-      boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+      transform: "translate(0, 0)",
+      boxShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)"
     }
   };
 
-  let { bxBookmarkk, bxContainerr, bxSubmitt, bxClearr, bxHoverr, bxNonHover } = bookMarkletStyle;
+  let {
+    pageModuleContent,
+    pageModuleContentStyled,
+    fields,
+    fieldsCol,
+    fieldsRow,
+    fieldsColFill,
+    btn,
+    btnSecondary,
+    btnSmall,
+    bxHoverr,
+    bxNonHover,
+    bxContainer,
+    textInput
+  } = bookMarkletStyle;
 
   const setStyles = (elementStyle, element) => {
     for (let style in elementStyle) {
-      element.style[style] = elementStyle[style]
+      element.style[style] = elementStyle[style];
     }
   };
 
-  const buttonHover = (button) => {
-    button.addEventListener('mouseenter', function () {
+  const buttonHover = button => {
+    button.addEventListener("mouseenter", function() {
       setStyles(bxHoverr, this);
     });
-    button.addEventListener('mouseleave', function () {
+    button.addEventListener("mouseleave", function() {
       setStyles(bxNonHover, this);
     });
   };
 
-  setStyles(bxBookmarkk, bxBookmark);
-  setStyles(bxContainerr, bxContainer);
-  setStyles(bxSubmitt, bxSubmit);
-  setStyles(bxClearr, bxClear);
+  setStyles(pageModuleContent, PageModule);
+  setStyles(pageModuleContentStyled, PageModuleStyled);
+  setStyles(fields, Fields);
+  setStyles(fieldsCol, FieldsCol);
+  setStyles(fieldsRow, FieldsRow);
+  setStyles(fieldsColFill, FieldsColFill);
+  setStyles(btn, Btn);
+  setStyles(btnSecondary, BtnSecondary);
+  setStyles(btnSmall, BtnSmall);
+  setStyles(bxContainer, BxContainer);
+  setStyles(textInput, TextInput);
 
-  buttonHover(bxSubmit);
-  buttonHover(bxClear);
+  buttonHover(runBtn);
+  buttonHover(clearBtn);
 
   /* ============================================================ */
   /* Setting Initial Object with keyword Arrays */
@@ -139,23 +233,30 @@ function loadBookMarklet() {
       this.outerHTML = outerHTML;
       /* this.amount = 0; */
     }
-  };
-
+  }
 
   /* ============================================================ */
   /* Scrape Body for specific keywords */
   let scrape = () => {
-    word === undefined ? (word = "home") : word;
+    if (word === undefined) {
+      console.log("Please enter a value");
+      return;
+    }
     queue.map((el, i, arr) => {
       let { nodeName, id, className, outerHTML } = el;
-      if ((className === word || id === word) && className !== bookClass) {
-        let item = new scrapedValues(nodeName, id, className, outerHTML);
-        elements[word].push(item);
+      if (!nodeName.includes("text")) {
+        if (
+          (className.includes(word) || id.includes(word)) &&
+          className !== bookClass
+        ) {
+          let item = new scrapedValues(nodeName, id, className, outerHTML);
+          elements[word].push(item);
+        }
       }
     });
 
     localStorage.setItem(word, JSON.stringify(elements[word]));
-    let storedItem = JSON.parse(localStorage.getItem(word));
+    JSON.parse(localStorage.getItem(word));
     console.log(elements);
   };
 
@@ -163,7 +264,7 @@ function loadBookMarklet() {
   /* Check for multiple elements of the same kind */
   let checkForMultiple = () => {
     return;
-  }
+  };
 
   /* ============================================================ */
   /* Clear Local Storage */
@@ -178,19 +279,18 @@ function loadBookMarklet() {
 
   /* ============================================================ */
   /* Listen for Keyword dropdown change */
-  input.addEventListener("change", function (e) {
+  bxInput.addEventListener("input", function(e) {
     word = e.target.value;
   });
 
   /* ============================================================ */
   /* Listen for Button Click to Scrape DOM */
-  bxSubmit.addEventListener("click", () => {
+  runBtn.addEventListener("click", () => {
     scrape();
     checkForMultiple();
   });
 
   /* ============================================================ */
   /* Listen for Button Click to clear local storage */
-  bxClear.addEventListener("click", clearStorage);
-};
-
+  clearBtn.addEventListener("click", clearStorage);
+}
